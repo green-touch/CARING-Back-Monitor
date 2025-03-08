@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    admin:
+      properties:
+        bootstrap.servers: kafka:9092
+    topic:
+      topics-to-create: caring-monitor
+      partitions: 3
+      replication-factor: 1
+
+  data:
+    mongodb:
+      url: mongodb://localhost:27017/caring-monitor
+
+kafka:
+  waggle:
+    topic: caring-monitor
+    groupId: caring-monitor-group
+
