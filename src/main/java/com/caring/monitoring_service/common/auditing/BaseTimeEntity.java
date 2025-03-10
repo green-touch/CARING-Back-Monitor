@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,8 +19,10 @@ import java.time.LocalDateTime;
 public class BaseTimeEntity {
 
     @CreatedDate
-    private LocalDateTime createdAt;
+    @Field("created_at")
+    private Instant createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    @Field("updated_at")
+    private Instant updatedAt;
 }
