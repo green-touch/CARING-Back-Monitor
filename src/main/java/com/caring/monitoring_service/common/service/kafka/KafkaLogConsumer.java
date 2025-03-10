@@ -22,6 +22,10 @@ public class KafkaLogConsumer {
         this.userLogRepository = userLogRepository;
     }
 
+    /**
+     * consumer의 개수는 yml로 정하는 것이 아닌, 서버 인스턴스의 개수로 설정 가능
+     * @param record
+     */
     @KafkaListener(topics = "logs-topic", groupId = "log-consumer-group")
     public void consume(ConsumerRecord<String, String> record) {
         try {
