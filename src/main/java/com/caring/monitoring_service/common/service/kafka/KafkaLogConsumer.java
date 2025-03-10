@@ -5,6 +5,7 @@ import com.caring.monitoring_service.domains.log.dao.repository.UserLogRepositor
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,14 +15,11 @@ import java.time.Instant;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class KafkaLogConsumer {
 
     private final UserLogRepository userLogRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    public KafkaLogConsumer(UserLogRepository userLogRepository) {
-        this.userLogRepository = userLogRepository;
-    }
+    private final ObjectMapper objectMapper;
 
     /**
      * consumer의 개수는 yml로 정하는 것이 아닌, 서버 인스턴스의 개수로 설정 가능
