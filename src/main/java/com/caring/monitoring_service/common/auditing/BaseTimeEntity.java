@@ -20,9 +20,6 @@ public class BaseTimeEntity {
 
     @CreatedDate
     @Field("created_at")
-    private Instant createdAt;
+    private Instant timestamp;
 
-    @LastModifiedDate
-    @Field("updated_at")
-    private Instant updatedAt;
 }
