@@ -21,5 +21,4 @@ public class UserLog extends BaseTimeEntity {
     private String id;
     private String userUuid;
     private String message;
-//    private Instant timestamp;
 }
