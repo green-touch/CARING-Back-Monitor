@@ -11,7 +11,6 @@ spring:
   data:
     mongodb:
       url: mongodb://localhost:27017/caring-monitor
-      data-base: caring-monitor
 
 kafka:
   waggle:
