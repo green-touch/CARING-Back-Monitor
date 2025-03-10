@@ -2,6 +2,7 @@ package com.caring.monitoring_service.common.service.kafka;
 
 import com.caring.monitoring_service.domains.log.dao.entity.UserLog;
 import com.caring.monitoring_service.domains.log.dao.repository.UserLogRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +31,15 @@ public class KafkaLogConsumer {
     public void consume(ConsumerRecord<String, String> record) {
         try {
             JsonNode logJson = objectMapper.readTree(record.value());
+
+            // JSON 필드 존재 여부 검증
+            if (!logJson.has("userUuid") || !logJson.has("message")) {
+                log.error("❌ 필수 필드가 누락됨: {}", record.value());
+                return;
+            }
             String userUuid = logJson.get("userUuid").asText();
             String message = logJson.get("message").asText();
+
 
             userLogRepository.save(UserLog.builder()
                     .userUuid(userUuid)
@@ -39,7 +47,10 @@ public class KafkaLogConsumer {
                     .build());
             log.info("✅ Log saved to MongoDB: {}", record.value());
 
-        } catch (Exception e) {
+        } catch (JsonProcessingException e){
+            log.error("❌ JSON 파싱 오류: {}", e.getMessage());
+        }
+        catch (Exception e) {
             log.error("❌ Failed to process log: {}", e.getMessage());
         }
     }
