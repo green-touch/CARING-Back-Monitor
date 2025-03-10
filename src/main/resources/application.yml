@@ -14,3 +14,9 @@ spring:
     mongodb:
       url: mongodb://localhost:27017/caring-monitor
 
+kafka:
+  topic:
+    logs: logs-topic
+  consumer:
+    group: log-consumer-group
+
