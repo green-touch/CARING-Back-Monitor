@@ -12,7 +12,7 @@ spring:
 
   data:
     mongodb:
-      url: mongodb://localhost:27017/caring-monitor
+      uri: mongodb://localhost:27017/caring-monitor
 
 kafka:
   topic:
